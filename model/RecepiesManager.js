@@ -23,4 +23,11 @@ class RecipiesManager {
             return recipe.title.toLowerCase().includes(keyword.trim().toLowerCase());
         })
     }
+
+    searchByIngridients = (keyword) => {
+
+        return this.recipeList.filter(recipe => {
+            return recipe.ingredients.toLowerCase().includes(keyword.trim().toLowerCase());
+        })
+    }
 }
