@@ -45,3 +45,21 @@ header a {
     flex-direction: row;
     gap: 10px;
 }
+
+#newRecipe {
+    background-color: coral;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+#newProfileInfo {
+    background-color: coral;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
