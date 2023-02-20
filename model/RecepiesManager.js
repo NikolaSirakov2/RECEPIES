@@ -1,26 +1,26 @@
 class Recipe {
-    constructor(name, ingredients, link, image){
-        this.name = name;
+    constructor(title, href, ingredients, thumbnail){
+        this.title = title;
+        this.href = href;
         this.ingredients = ingredients;
-        this.link = link;
-        this.image = image;
+        this.thumbnail = thumbnail;
     }
 }
 
 class RecipiesManager {
     constructor(){
         this.recipeList = DATA.map(recipe => new Recipe(
-            recipe.name,
+            recipe.title,
+            recipe.href,
             recipe.ingredients,
-            recipe.link,
-            recipe.image
+            recipe.thumbnail
         ));
     }
 
-    search(keyword) {
+    search = (keyword) => {
 
         return this.recipeList.filter(recipe => {
-            return recipe.name.toLowerCase().includes(keyword.trim().toLowerCase());
+            return recipe.title.toLowerCase().includes(keyword.trim().toLowerCase());
         })
     }
 }
