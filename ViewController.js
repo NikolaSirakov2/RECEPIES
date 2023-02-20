@@ -5,6 +5,7 @@ class ViewController {
     this.recepiesManager = new RecipiesManager();
     this.favoriteManager = new FavoriteManager();
     this.newRecipeManager = new NewRecipeManager();
+    this.userManager = new UserManager();
   }
 
   handleHashChange = () => {
@@ -35,8 +36,12 @@ class ViewController {
       case "favoriteRecepie":
         this.renderFavoriteRecepies();
         break;
-        case "createRecepie":
-            this.renderNewRecepie();
+      case "createRecepie":
+        this.renderNewRecepie();
+        break;
+      case "myProfile":
+        this.renderMyProfilePage();
+        break;
     }
   };
 
@@ -50,7 +55,6 @@ class ViewController {
 
       let link = createElement("a");
       link.href = recipe.href;
-      
 
       let tumbnail = createElement("img");
       tumbnail.src = recipe.thumbnail;
@@ -64,14 +68,12 @@ class ViewController {
       let ingredients = createElement("div");
       ingredients.innerText = recipe.ingredients;
 
-      
-        let addToFavorites = createElement("button");
-        addToFavorites.classList = "add";
-        addToFavorites.innerText = "Добави в любими";
-        addToFavorites.addEventListener("click", () => {
-          this.favoriteManager.addToFavorites(recipe);
-        });
-      
+      let addToFavorites = createElement("button");
+      addToFavorites.classList = "add";
+      addToFavorites.innerText = "Добави в любими";
+      addToFavorites.addEventListener("click", () => {
+        this.favoriteManager.addToFavorites(recipe);
+      });
 
       let cook = createElement("button");
       cook.innerText = "Сготви";
@@ -101,6 +103,46 @@ class ViewController {
 
     this.renderRecepies(this.favoriteManager.favorite, favContainer);
   };
+
+  renderNewRecepie = () => {
+    let newRecipe = document.getElementById("newRecipe");
+
+    newRecipe.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if (
+        e.currentTarget.title.value.length > 0 &&
+        e.currentTarget.href.value.length > 0 &&
+        e.currentTarget.ingredients.value.length > 0 &&
+        e.currentTarget.thumbnail.value.length > 0
+      ) {
+        let test = new NewRecipe(
+          e.currentTarget.title.value,
+          e.currentTarget.href.value,
+          e.currentTarget.ingredients.value,
+          e.currentTarget.thumbnail.value
+        );
+        console.log(test);
+        this.recepiesManager.recipeList.unshift(test);
+
+        e.currentTarget.title.value = "";
+        e.currentTarget.href.value = "";
+        e.currentTarget.ingredients.value = "";
+        e.currentTarget.thumbnail.value = "";
+      }
+    });
+  };
+
+  renderMyProfilePage = () => {
+
+        let userPhoto = document.getElementById('headerImage')
+
+        let user = new User("nik", "30", "Plovdiv", "./images/man.avif");
+        this.userManager.userInfo.push(user);
+        this.userManager.userInfo[0]
+        userPhoto.src = this.userManager.userInfo[0].photo || "./images/guest.png";
+        
+  }
 }
 
 let viewController = new ViewController();
