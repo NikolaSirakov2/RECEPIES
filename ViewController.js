@@ -3,6 +3,8 @@ class ViewController {
     window.addEventListener("hashchange", this.handleHashChange);
     window.addEventListener("load", this.handleHashChange);
     this.recepiesManager = new RecipiesManager();
+    this.favoriteManager = new FavoriteManager();
+    this.newRecipeManager = new NewRecipeManager();
   }
 
   handleHashChange = () => {
@@ -32,47 +34,61 @@ class ViewController {
         break;
       case "favoriteRecepie":
         this.renderFavoriteRecepies();
+        break;
+        case "createRecepie":
+            this.renderNewRecepie();
     }
   };
 
   renderRecepies = (recipeList, container) => {
-        container.innerHTML = "";
+    container.innerHTML = "";
 
-        recipeList.forEach((recipe) => {
-        let card = createElement("div");
-        card.classList.add("card");
-        card.style.width = "200px";
-  
-        let tumbnail = createElement("img");
-        tumbnail.src = recipe.thumbnail;
-        tumbnail.style.width = "200px";
-  
-        let title = createElement("div");
-        title.innerText = recipe.title;
-  
-        let ingredients = createElement("div");
-        ingredients.innerText = recipe.ingredients;
-  
+    recipeList.forEach((recipe) => {
+      let card = createElement("div");
+      card.classList.add("card");
+      card.style.width = "200px";
+
+      let link = createElement("a");
+      link.href = recipe.href;
+      
+
+      let tumbnail = createElement("img");
+      tumbnail.src = recipe.thumbnail;
+      tumbnail.style.width = "200px";
+
+      link.appendChild(tumbnail);
+
+      let title = createElement("div");
+      title.innerText = recipe.title;
+
+      let ingredients = createElement("div");
+      ingredients.innerText = recipe.ingredients;
+
+      
         let addToFavorites = createElement("button");
-        addToFavorites.classList = "add"
+        addToFavorites.classList = "add";
         addToFavorites.innerText = "Добави в любими";
-  
-        let cook = createElement("button");
-        cook.innerText = "Сготви";
-  
-        card.append(tumbnail, title, ingredients, addToFavorites, cook);
-  
-        container.appendChild(card);
-      });
-  }
+        addToFavorites.addEventListener("click", () => {
+          this.favoriteManager.addToFavorites(recipe);
+        });
+      
+
+      let cook = createElement("button");
+      cook.innerText = "Сготви";
+
+      card.append(link, title, ingredients, addToFavorites, cook);
+
+      container.appendChild(card);
+    });
+  };
 
   renderAllRecepiesPage = () => {
     let searchByName = document.getElementById("searchByName");
 
     searchByName.addEventListener("input", (e) => {
-        let result = this.recepiesManager.search(e.target.value);
+      let result = this.recepiesManager.search(e.target.value);
 
-        this.renderRecepies(result, recepiesContainer);
+      this.renderRecepies(result, recepiesContainer);
     });
 
     let recepiesContainer = document.querySelector("#allRecepies .container");
@@ -81,7 +97,9 @@ class ViewController {
   };
 
   renderFavoriteRecepies = () => {
+    let favContainer = document.querySelector("#favoriteRecepie .fav");
 
+    this.renderRecepies(this.favoriteManager.favorite, favContainer);
   };
 }
 
