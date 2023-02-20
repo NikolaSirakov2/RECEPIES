@@ -1,0 +1,4 @@
+class FavoriteManager {
+
+    favorite = []
+}
