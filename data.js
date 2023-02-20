@@ -1,4 +1,4 @@
-const DATA = [
+let DATA = [
     {
         "title": "Ginger Champagne",
         "href": "http://allrecipes.com/Recipe/Ginger-Champagne/Detail.aspx",
