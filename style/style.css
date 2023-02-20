@@ -39,3 +39,9 @@ header a {
     width: 180px;
     margin: 10px;
 }
+
+.fav {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
