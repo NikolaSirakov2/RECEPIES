@@ -1,3 +1,5 @@
+
+
 main #allRecepies {
     height: 80vh;
     background-color: aqua;
@@ -21,4 +23,19 @@ main #myProfile {
 main #errorPage {
     height: 80vh;
     background-color: red;
+}
+
+header a {
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.card {
+    background-color: rgb(167, 112, 45);
+    width: 180px;
+    margin: 10px;
 }
