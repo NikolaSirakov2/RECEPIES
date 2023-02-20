@@ -1,4 +1,6 @@
-
+main {
+    width: 100%;
+}
 
 main #allRecepies {
     height: 80vh;
@@ -7,6 +9,7 @@ main #allRecepies {
 
 main #favoriteRecepie {
     height: 80vh;
+    width: 100%;
     background-color: rgb(210, 223, 154);
 }
 
@@ -30,6 +33,7 @@ header a {
 }
 
 .container {
+    position: relative;
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -42,7 +46,9 @@ header a {
 
 .fav {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
+    width: 100%;
     gap: 10px;
 }
 
