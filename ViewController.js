@@ -71,9 +71,12 @@ class ViewController {
       let addToFavorites = createElement("button");
       addToFavorites.classList = "add";
       addToFavorites.innerText = "Добави в любими";
-      addToFavorites.addEventListener("click", () => {
-        this.favoriteManager.addToFavorites(recipe);
-      });
+      if (addToFavorites.innerText === "Добави в любими") {
+        addToFavorites.addEventListener("click", () => {
+          this.favoriteManager.addToFavorites(recipe);
+          addToFavorites.innerText = "Премахни от любими";
+        });
+      }
 
       let cook = createElement("button");
       cook.innerText = "Сготви";
@@ -86,6 +89,19 @@ class ViewController {
 
   renderAllRecepiesPage = () => {
     let searchByName = document.getElementById("searchByName");
+    let searchByIngredients = document.getElementById("searchIngredients");
+
+    searchByIngredients.addEventListener("input", (e) => {
+      if (e.target.value !== "default") {
+        let result = this.recepiesManager.searchByIngridients(e.target.value);
+        this.renderRecepies(result, recepiesContainer);
+      } else if (e.target.value === "default") {
+        let recepiesContainer = document.querySelector(
+          "#allRecepies .container"
+        );
+        this.renderRecepies(this.recepiesManager.recipeList, recepiesContainer);
+      }
+    });
 
     searchByName.addEventListener("input", (e) => {
       let result = this.recepiesManager.search(e.target.value);
@@ -134,15 +150,13 @@ class ViewController {
   };
 
   renderMyProfilePage = () => {
+    let userPhoto = document.getElementById("headerImage");
 
-        let userPhoto = document.getElementById('headerImage')
-
-        let user = new User("nik", "30", "Plovdiv", "./images/man.avif");
-        this.userManager.userInfo.push(user);
-        this.userManager.userInfo[0]
-        userPhoto.src = this.userManager.userInfo[0].photo || "./images/guest.png";
-        
-  }
+    let user = new User("nik", "30", "Plovdiv", "./images/man.avif");
+    this.userManager.userInfo.push(user);
+    this.userManager.userInfo[0];
+    userPhoto.src = this.userManager.userInfo[0].photo;
+  };
 }
 
 let viewController = new ViewController();
