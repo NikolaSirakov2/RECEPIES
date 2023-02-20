@@ -12,6 +12,7 @@
     <script src="./utils/createElement.js"></script>
     <script src="./model/FavoriteManager.js"></script>
     <script src="./model/NewRecipeManager.js"></script>
+    <script src="./model/UserManager.js"></script>
 
     <style>
       header {
@@ -60,7 +61,7 @@
       <a href="#favoriteRecepie">Любими рецепти</a>
       <a href="#createRecepie">Създай рецепта</a>
       <a href="#myProfile">Моят Профил</a>
-      <img width="90" src="./images/guest.png" alt="guest" />
+      <img id="headerImage" width="90" src="./images/guest.png" alt="guest" />
     </header>
 
     <main>
@@ -74,9 +75,26 @@
         </div>
       </div>
       <div id="createRecepie">
-        
+            <form id="newRecipe">
+                <input type="text" name="title" placeholder="title">
+                <textarea name="ingredients" cols="30" rows="5"></textarea>
+                <input type="text" name="href" placeholder="link">
+                <input type="text" name="thumbnail" placeholder="thumbnail">
+                <input type="submit" value="Create new recipe">
+            </form>
       </div>
-      <div id="myProfile"></div>
+      <div id="myProfile">
+        <form id="newProfileInfo">
+            <label for="photo">Chose profile picture</label>
+            <input type="file" name="photo" accept="image/png, image/jpeg">
+            
+            <input type="text" name="name" placeholder="name">
+            <input type="text" name="age" placeholder="age">
+            <input type="text" name="address" placeholder="adress">
+            <input type="submit" value="Change your profile info">
+            
+        </form>
+      </div>
       <div id="errorPage"></div>
     </main>
 
