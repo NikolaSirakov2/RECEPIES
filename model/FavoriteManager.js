@@ -12,6 +12,10 @@ class FavoriteManager {
     favorite = []
 
     addToFavorites = (recipe) => {
-        this.favorite.push(new FavoriteRecepie(recipe.title, recipe.ingredients, recipe.thumbnail));
+        if(this.favorite.includes(recipe.title)){
+            console.log("test");
+        } else {
+            this.favorite.push(new FavoriteRecepie(recipe.title, recipe.ingredients, recipe.thumbnail));
+        }
     }
 }
